@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#13233f" />
+    <title>MeshForum PWA</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>MeshForum</h1>
+      <div class="status-row">
+        <span id="nodeBadge">Node: loading…</span>
+        <span id="peerBadge">Peers: 0</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel threads-panel">
+        <div class="panel-title-row">
+          <h2>Threads</h2>
+          <button id="newThreadBtn" class="primary">+ New</button>
+        </div>
+        <ul id="threadsList" class="list"></ul>
+      </section>
+
+      <section class="panel posts-panel">
+        <h2 id="activeThreadTitle">Select a thread</h2>
+        <ul id="postsList" class="list posts-list"></ul>
+        <form id="newPostForm" class="composer hidden">
+          <textarea id="postText" placeholder="Write an encrypted post" maxlength="5000" required></textarea>
+          <button type="submit" class="primary">Post</button>
+        </form>
+      </section>
+
+      <section class="panel network-panel">
+        <h2>Peer Networking</h2>
+        <div class="card">
+          <h3>Invite Link / QR Data</h3>
+          <textarea id="offerData" rows="6" readonly></textarea>
+          <div class="row">
+            <button id="createOfferBtn">Create Invite</button>
+            <button id="copyOfferBtn">Copy</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Join Peer</h3>
+          <textarea id="remoteData" rows="6" placeholder="Paste remote offer/answer payload"></textarea>
+          <div class="row">
+            <button id="acceptRemoteBtn">Accept Payload</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Connected Peers</h3>
+          <ul id="peerList" class="list peer-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="threadDialog">
+      <form method="dialog" id="threadDialogForm">
+        <h3>Create thread</h3>
+        <input id="threadTitleInput" type="text" maxlength="120" required placeholder="Thread title" />
+        <menu>
+          <button value="cancel">Cancel</button>
+          <button value="default" class="primary" id="saveThreadBtn">Save</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
