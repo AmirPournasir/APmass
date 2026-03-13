@@ -41,10 +41,10 @@ const els = {
   acceptRemoteBtn: document.getElementById('acceptRemoteBtn')
 };
 
-// Boot sequence: cache registration, DB + key initialization, then UI wiring.
+// شروع برنامه: ثبت سرویس‌ورکر، آماده‌سازی دیتابیس و کلید، سپس اتصال رویدادهای UI.
 boot().catch((err) => {
   console.error(err);
-  alert(`Startup error: ${err.message}`);
+  alert(`خطا در راه‌اندازی: ${err.message}`);
 });
 
 async function boot() {
@@ -155,6 +155,18 @@ async function renderThreads(selectId = null) {
   const threads = (await getAllRecords(db, 'threads')).sort((a, b) => b.updatedAt - a.updatedAt);
   els.threadsList.innerHTML = '';
 
+  if (!threads.length) {
+    const li = document.createElement('li');
+    li.className = 'meta';
+    li.textContent = 'هنوز موضوعی وجود ندارد.';
+    els.threadsList.appendChild(li);
+    currentThreadId = null;
+    els.activeThreadTitle.textContent = 'یک موضوع انتخاب کنید';
+    els.newPostForm.classList.add('hidden');
+    els.postsList.innerHTML = '';
+    return;
+  }
+
   threads.forEach((thread) => {
     const li = document.createElement('li');
     li.className = `thread-item ${thread.id === (selectId || currentThreadId) ? 'active' : ''}`;
@@ -175,11 +187,19 @@ async function renderThreads(selectId = null) {
 
 async function renderPosts(threadId) {
   const thread = await getRecord(db, 'threads', threadId);
-  els.activeThreadTitle.textContent = thread ? thread.title : 'Thread not found';
+  els.activeThreadTitle.textContent = thread ? thread.title : 'موضوع پیدا نشد';
   els.newPostForm.classList.toggle('hidden', !thread);
   els.postsList.innerHTML = '';
 
   const posts = await getPostsByThread(db, threadId);
+  if (!posts.length) {
+    const li = document.createElement('li');
+    li.className = 'meta';
+    li.textContent = 'برای این موضوع هنوز پیامی ثبت نشده است.';
+    els.postsList.appendChild(li);
+    return;
+  }
+
   posts.forEach((post) => {
     const li = document.createElement('li');
     li.innerHTML = `
@@ -191,7 +211,7 @@ async function renderPosts(threadId) {
 }
 
 async function publishEnvelope(topicType, topicId, payload) {
-  // All forum data is encrypted locally and only encrypted envelopes are gossiped.
+  // همه داده‌ها پیش از انتشار در شبکه، محلی رمزنگاری می‌شوند.
   const encryptedPayload = await encryptMessage(forumKey, payload);
   const envelope = await buildEnvelope({
     topicId: `${topicType}:${topicId}`,
@@ -213,7 +233,7 @@ async function onPeerPacket(packet) {
   const accepted = await shouldAcceptEnvelope(db, hasMessageHash, saveMessageEnvelope, envelope);
   if (!accepted) return;
 
-  // Decrypt after dedupe check so we avoid expensive decrypt work for duplicates.
+  // ابتدا تکراری نبودن بررسی می‌شود تا رمزگشایی غیرضروری انجام نشود.
   const payload = await decryptMessage(forumKey, envelope.encryptedPayload);
   await applyPayload(payload);
 
@@ -245,11 +265,11 @@ async function applyPayload(payload) {
 }
 
 function renderNodeBadge() {
-  els.nodeBadge.textContent = `Node: ${currentNodeId.slice(0, 10)}…`;
+  els.nodeBadge.textContent = `گره: ${currentNodeId.slice(0, 10)}…`;
 }
 
 function renderPeerState(peerIds) {
-  els.peerBadge.textContent = `Peers: ${peerIds.length}`;
+  els.peerBadge.textContent = `همتاها: ${peerIds.length}`;
   els.peerList.innerHTML = '';
   peerIds.forEach((id) => {
     const li = document.createElement('li');

@@ -1,61 +1,61 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#13233f" />
-    <title>MeshForum PWA</title>
+    <meta name="theme-color" content="#0f172a" />
+    <title>انجمن مش</title>
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header class="topbar">
-      <h1>MeshForum</h1>
+      <h1>انجمن مش</h1>
       <div class="status-row">
-        <span id="nodeBadge">Node: loading…</span>
-        <span id="peerBadge">Peers: 0</span>
+        <span id="nodeBadge">گره: در حال بارگذاری…</span>
+        <span id="peerBadge">همتاها: ۰</span>
       </div>
     </header>
 
     <main class="layout">
       <section class="panel threads-panel">
         <div class="panel-title-row">
-          <h2>Threads</h2>
-          <button id="newThreadBtn" class="primary">+ New</button>
+          <h2>موضوع‌ها</h2>
+          <button id="newThreadBtn" class="primary">+ موضوع جدید</button>
         </div>
         <ul id="threadsList" class="list"></ul>
       </section>
 
       <section class="panel posts-panel">
-        <h2 id="activeThreadTitle">Select a thread</h2>
+        <h2 id="activeThreadTitle">یک موضوع انتخاب کنید</h2>
         <ul id="postsList" class="list posts-list"></ul>
         <form id="newPostForm" class="composer hidden">
-          <textarea id="postText" placeholder="Write an encrypted post" maxlength="5000" required></textarea>
-          <button type="submit" class="primary">Post</button>
+          <textarea id="postText" placeholder="متن پیام رمزنگاری‌شده را بنویسید" maxlength="5000" required></textarea>
+          <button type="submit" class="primary">ارسال</button>
         </form>
       </section>
 
       <section class="panel network-panel">
-        <h2>Peer Networking</h2>
+        <h2>اتصال همتا به همتا</h2>
         <div class="card">
-          <h3>Invite Link / QR Data</h3>
+          <h3>دعوت‌نامه (برای QR یا کپی)</h3>
           <textarea id="offerData" rows="6" readonly></textarea>
           <div class="row">
-            <button id="createOfferBtn">Create Invite</button>
-            <button id="copyOfferBtn">Copy</button>
+            <button id="createOfferBtn">ساخت دعوت</button>
+            <button id="copyOfferBtn">کپی</button>
           </div>
         </div>
 
         <div class="card">
-          <h3>Join Peer</h3>
-          <textarea id="remoteData" rows="6" placeholder="Paste remote offer/answer payload"></textarea>
+          <h3>پیوستن به همتا</h3>
+          <textarea id="remoteData" rows="6" placeholder="داده دریافتی را اینجا قرار دهید"></textarea>
           <div class="row">
-            <button id="acceptRemoteBtn">Accept Payload</button>
+            <button id="acceptRemoteBtn">ثبت داده</button>
           </div>
         </div>
 
         <div class="card">
-          <h3>Connected Peers</h3>
+          <h3>همتاهای متصل</h3>
           <ul id="peerList" class="list peer-list"></ul>
         </div>
       </section>
@@ -63,11 +63,11 @@
 
     <dialog id="threadDialog">
       <form method="dialog" id="threadDialogForm">
-        <h3>Create thread</h3>
-        <input id="threadTitleInput" type="text" maxlength="120" required placeholder="Thread title" />
+        <h3>ایجاد موضوع</h3>
+        <input id="threadTitleInput" type="text" maxlength="120" required placeholder="عنوان موضوع" />
         <menu>
-          <button value="cancel">Cancel</button>
-          <button value="default" class="primary" id="saveThreadBtn">Save</button>
+          <button value="cancel">انصراف</button>
+          <button value="default" class="primary" id="saveThreadBtn">ذخیره</button>
         </menu>
       </form>
     </dialog>

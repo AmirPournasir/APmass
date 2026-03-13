@@ -1,14 +1,14 @@
 {
-  "name": "MeshForum",
-  "short_name": "MeshForum",
+  "name": "انجمن مش",
+  "short_name": "مش‌فوروم",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0b1220",
-  "theme_color": "#13233f",
-  "description": "Offline-first, peer-to-peer decentralized forum PWA",
+  "background_color": "#f8fafc",
+  "theme_color": "#0f172a",
+  "description": "انجمن غیرمتمرکز، آفلاین‌اول و همتا‌به‌همتا",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='36' fill='%2313233f'/%3E%3Ccircle cx='78' cy='100' r='16' fill='%2347a9ff'/%3E%3Ccircle cx='178' cy='100' r='16' fill='%2347a9ff'/%3E%3Cpath d='M78 100h100M78 100l50 72M178 100l-50 72' stroke='%239bd2ff' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='36' fill='%230f172a'/%3E%3Ccircle cx='78' cy='100' r='16' fill='%232563eb'/%3E%3Ccircle cx='178' cy='100' r='16' fill='%232563eb'/%3E%3Cpath d='M78 100h100M78 100l50 72M178 100l-50 72' stroke='%2393c5fd' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E",
       "sizes": "256x256",
       "type": "image/svg+xml",
       "purpose": "any maskable"
