@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>انجمن مش</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>انجمن مش</h1>
+      <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="منوی موبایل">☰</button>
+      <div class="status-row">
+        <span id="nodeBadge">گره: ...</span>
+        <span id="peerBadge">همتاها: ۰</span>
+      </div>
+    </header>
+
+    <nav id="mobileNav" class="mobile-nav">
+      <button id="tabForumBtn" class="active">انجمن</button>
+      <button id="tabChatBtn">چت</button>
+      <button id="tabNetworkBtn">شبکه</button>
+    </nav>
+
+    <main class="layout">
+      <section id="forumPanel" class="panel">
+        <div class="panel-title-row">
+          <h2>موضوع‌ها</h2>
+          <button id="newThreadBtn" class="primary">+ جدید</button>
+        </div>
+        <ul id="threadsList" class="list"></ul>
+
+        <h3 id="activeThreadTitle" class="sub-title">یک موضوع انتخاب کنید</h3>
+        <ul id="postsList" class="list posts-list"></ul>
+        <form id="newPostForm" class="composer hidden">
+          <textarea id="postText" placeholder="پیام انجمن..." maxlength="4000" required></textarea>
+          <button type="submit" class="primary">ارسال پیام</button>
+        </form>
+      </section>
+
+      <section id="chatPanel" class="panel">
+        <h2>پیام‌رسان امن</h2>
+
+        <form id="profileForm" class="composer compact">
+          <label for="profileNameInput">نام نمایشی شما</label>
+          <div class="row">
+            <input id="profileNameInput" type="text" maxlength="32" placeholder="مثلا: کاربر آبی" required />
+            <button type="submit" class="primary">ذخیره</button>
+          </div>
+          <div id="myChatIdLabel" class="meta"></div>
+        </form>
+
+        <div class="chat-grid">
+          <div>
+            <h3 class="sub-title">مخاطبین آنلاین</h3>
+            <ul id="chatContactsList" class="list"></ul>
+          </div>
+          <div>
+            <h3 id="chatTitle" class="sub-title">یک مخاطب انتخاب کنید</h3>
+            <ul id="chatMessagesList" class="list chat-messages"></ul>
+            <form id="chatForm" class="composer hidden">
+              <textarea id="chatText" placeholder="پیام خصوصی رمزنگاری‌شده..." maxlength="2000" required></textarea>
+              <button type="submit" class="primary">ارسال خصوصی</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="networkPanel" class="panel">
+        <h2>اتصال همتا‌به‌همتا</h2>
+        <div class="card">
+          <h3>دعوت‌نامه (QR/کپی)</h3>
+          <textarea id="offerData" rows="6" readonly></textarea>
+          <div class="row">
+            <button id="createOfferBtn">ساخت دعوت</button>
+            <button id="copyOfferBtn">کپی</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>پیوستن به شبکه</h3>
+          <textarea id="remoteData" rows="6" placeholder="داده دریافتی را وارد کنید"></textarea>
+          <button id="acceptRemoteBtn">ثبت داده</button>
+        </div>
+
+        <div class="card">
+          <h3>همتاهای متصل</h3>
+          <ul id="peerList" class="list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="threadDialog">
+      <form method="dialog" id="threadDialogForm">
+        <h3>ایجاد موضوع</h3>
+        <input id="threadTitleInput" type="text" maxlength="120" required placeholder="عنوان موضوع" />
+        <menu>
+          <button value="cancel">انصراف</button>
+          <button value="default" class="primary">ذخیره</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
